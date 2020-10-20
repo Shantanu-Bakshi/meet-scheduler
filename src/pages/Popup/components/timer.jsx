@@ -9,12 +9,17 @@ class Timer extends Component {
     }
 
     async componentDidMount() {
-        var alarms = await new Promise((resolve) => chrome.alarms.getAll(resolve));
+        let alarms = {};
+        alarms = await new Promise((resolve) => chrome.alarms.getAll(resolve));
         alarms.sort(function (a, b) {
             return a.scheduledTime - b.scheduledTime;
         });
-        var timeobj = alarms[0];
-        var time = timeobj.scheduledTime;
+        let timeobj = alarms[0];
+        console.log(typeof(alarms));
+        console.log("error");
+        console.log(timeobj);
+        console.log(typeof(timeobj));
+        let time = timeobj.scheduledTime;
         this.setState(() => ({
             remTime: time - this.today
         }))
